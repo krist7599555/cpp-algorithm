@@ -1,6 +1,9 @@
+
+typedef pair<int,int> pii;
+
 class Graph{
 	int V;
-	list< iPair > *adj;
+	list<pii> *adj;
 public:
 	Graph(int V);
 	void addEdge(int u, int v, int w);
@@ -9,7 +12,7 @@ public:
 
 Graph::Graph(int V){
 	this->V = V;
-	adj = new list< iPair > [V];
+	adj = new list<pii> [V];
 }
 
 void Graph::addEdge(int u, int v, int w){
@@ -19,8 +22,8 @@ void Graph::addEdge(int u, int v, int w){
 void Graph::bellmanFord(int s){
 
 	int dist[V];
-	for(int i=0; i<V; i++) dist[i]=INT_MAX;
-
+	fill(dist,dist+v,INT_MAX);
+	
 	dist[s]=0;
 
 	for(int i=0;i<V;i++){
@@ -31,9 +34,8 @@ void Graph::bellmanFord(int s){
 		}
 	}
 
-	for(int i=0;i<V;i++){
-		list< iPair >::iterator it;
-		for(it=adj[i].begin();it!=adj[i].end();it++){
+	for(int i=0;i<V;i++){	
+		for(const iPair & pi : adj[i]){
 			if(dist[i]!=INT_MAX && dist[i]+pi.se < dist[pi.fi]){
 				cout<<"Negative cycle exists\n";
 				return ;
