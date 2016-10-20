@@ -2,8 +2,8 @@
 
 int n, m;
 struct Node{
-    vector<int> adj;
-    vector<int> rev_adj;
+    vector<int> adj; // point to nex
+    vector<int> rev_adj; // nex point to me
 };
 Node graf[MAX_N];
 
