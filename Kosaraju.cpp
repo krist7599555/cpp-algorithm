@@ -35,10 +35,13 @@ void kosaraju_dfs_2(int x)
 
 }
 
-void Kosaraju()
-{
+void Kosaraju(){
+    
+    fill(visited,visited+n,false);
+    
     for (int i=0;i<n;i++)
         if (!visited[i]) kosaraju_dfs_1(i);
+    
     
     fill(visited,visited+n,false);
     
