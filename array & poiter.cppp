@@ -1,0 +1,7 @@
+int (*arr[1][2])[3] = new int[x] [3]; 
+// arr is Array[1][2] that contain poiter to int[3]
+// arr is Array[1][2] that contain array  of int[3]
+// arr is Array[1][2][x][3]
+// arr[1][2][0][3] = (*arr[1][2])[3]
+// poiter const = array
+// operator[](x) == *(this + x)
