@@ -45,3 +45,40 @@ bool miller(lli num)
 	return false;
 
 }
+
+
+bool miller(lli num){
+	
+	if(num<=1) 	return false;
+	if(num<=3) 	return true;
+	if(num%2==0)    return false;
+	
+	lli k(0), m(num-1);
+	while((m&1)==0) k++, m >>= 1;
+	
+	lli b0 = powmod (2, m, num);
+	if (b0 == 1) return true;
+	
+	while (b0 != num-1 and k--)
+		b0 = mulmod(b0, b0, num); 
+	
+	return b0 == num-1;
+}
+
+bool miller(lli num){
+	
+	if(num<=1) return false;
+	if(num<=3) return true;
+	if(~num&1) return false;
+	
+	lli k(0), m(num-1);
+	while(~m & 1) k++, m >>= 1;
+	
+	lli b0 = (1 << m) % num; //powmod (2, m, num);
+	if (b0 == 1) return true;
+	
+	while (b0 != num-1 and k--)
+		b0 = b0 * b0 % num; //mulmod(b0, b0, num); 
+	
+	return b0 == num-1;
+}
