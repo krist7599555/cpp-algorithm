@@ -29,7 +29,7 @@ bool miller(lli num)
 {
 	if(num<=1) 	return false;
 	if(num==2) 	return true;
-	if(num%2==0)return false;
+	if(num%2==0)	return false;
 	
 	lli k = __builtin_ctz(num-1);
 	lli m = (num-1) >> k;
@@ -39,7 +39,7 @@ bool miller(lli num)
 	
 	while (k--){
 		b0 = mulmod(b0, b0, num); // b0^2 % num
-		if(b0 == 1) 	  return false;
+		if(b0 == 1) 	return false;
 		if(b0 == num-1)	return true;
 	}
 	return false;
