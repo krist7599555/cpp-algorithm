@@ -1,17 +1,6 @@
 #include <bits/extc++.h>
 #include <iostream>
-#define rep(i,k,n) for(decltype(k) i=(k);i!=(n);++i)
-#define ALL(x) (x).begin(),(x).end()
-#define SZ(x) int((x).size())
-#define fi first
-#define se second
-using namespace __gnu_pbds;
-using namespace __gnu_cxx;
-using namespace __gnu_pbds::detail;
 using namespace std;
-typedef long long lli;
-typedef std::vector<int> Vec;
-typedef std::pair<int,int> pii;
 
 template<typename Tag>
 struct result {
@@ -65,5 +54,6 @@ int main() {
   (a.*poi_member) = 13;
   (a.*result<Af<int>>::ptr)();
   (a.*poi_member2) = 23;
+  (a.*result<Am<int>>::ptr) = 999;
   (a.*result<Af<int>>::ptr)();
 }
