@@ -25,14 +25,14 @@ int main(){
 	srand(time(NULL));
 	generate(in.begin(),in.end(),rand);
 	
-	#define test(Container,command)										\
-	{																	\
-		clock_t s = clock();											\
-		Container c;													\
-		for (int i : in) command;										\
-		clock_t t = clock();											\
-		printf(" %.8lf ",double(t - s) / CLOCKS_PER_SEC); 				\
-		cout << #Container << '\n';										\
+	#define test(Container,command)							\
+	{										\
+		clock_t s = clock();							\
+		Container c;								\
+		for (int i : in) command;						\
+		clock_t t = clock();							\
+		printf(" %.8lf ",double(t - s) / CLOCKS_PER_SEC); 			\
+		cout << #Container << '\n';						\
 	}
 	
 	cout << "TIMING TEST \n\n";
