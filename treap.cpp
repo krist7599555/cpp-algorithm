@@ -20,8 +20,8 @@ inline void fixup (Node* nd){
 void merge (Node*& nd, Node*&l, Node*& r){
 	if (!l or !r) return void (nd = l ?: r);
 	if (l->prio > r->prio)
-		 merge (l->r, l->r, r), nd = l;
-	else merge (r->l, l, r->l), nd = r;
+		merge (l->r, l->r, r), nd = l;
+	else 	merge (r->l, l, r->l), nd = r;
 	fixup (nd);
 }
 
@@ -30,12 +30,10 @@ void split (Node*& nd, Node*& l, Node*& r, int pos){
 		return void (l = r = nullptr);
 	int szl = 1 + (nd->l ? nd->l->sz : 0);
 	if (szl <= pos){
-		l = nd;
-		split (l->r, l->r, r, pos - szl);
+		l = nd, split (l->r, l->r, r, pos - szl);
 		fixup (l);
 	}else{
-		r = nd;
-		split (r->l, l, r->l, pos);
+		r = nd, split (r->l, l, r->l, pos);
 		fixup (r);
 	}
 }
@@ -48,8 +46,8 @@ void insert (Node*& nd, Node* v, int pos){
 	}else{
 		int szl = 1 + (nd->l ? nd->l->sz : 0);
 		if (szl <= pos)
-			 insert (nd->r, v, pos - szl);
-		else insert (nd->l, v, pos);
+			insert (nd->r, v, pos - szl);
+		else 	insert (nd->l, v, pos);
 	}
 	fixup (nd);
 }
