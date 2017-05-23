@@ -5,12 +5,12 @@ class Range {
 public:
 	const int s, t;
 	Range(int s, int t): s(s), t(t) {}
-    class iterator: public std::iterator<
-					std::input_iterator_tag,  // iterator_category
-					int,                      // value_type
-					int,                      // difference_type
-					const int*,               // pointer
-					int>{                     // reference
+	class iterator: public std::iterator<
+				std::input_iterator_tag,  // iterator_category
+				int,                      // value_type
+				int,                      // difference_type
+				const int*,               // pointer
+				int>{                     // reference
 		private:
 			int num;
 		public:
@@ -20,9 +20,9 @@ public:
 			bool operator==(iterator other) const {return num == other.num;}
 			bool operator!=(iterator other) const {return num != other.num;}
 			reference operator*() const {return num;}
-    };
-    iterator begin() {return iterator(s);}
-    iterator end()   {return iterator(t);}
+	};
+	iterator begin() {return iterator(s);}
+	iterator end()   {return iterator(t);}
 };
  
 int main() {
