@@ -7,3 +7,4 @@ long process_size_in_pages(void){
       fclose(f);
    return s;
 }
+// bash : cd /proc/self
