@@ -4,6 +4,6 @@ long process_size_in_pages(void){
    FILE *f = fopen("/proc/self/statm", "r");
    if(f)
       fscanf(f, "%ld", &s),
-  	  fclose(f);
+      fclose(f);
    return s;
 }
