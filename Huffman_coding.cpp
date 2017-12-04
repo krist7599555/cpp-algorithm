@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-//#define __portable__
+#define __portable__
 
 class Huffman {
 public:
@@ -92,38 +92,32 @@ public:
     }
 #ifdef __portable__
     Huffman& build_from_hash_tree(Str in){
-        stringstream inp; inp << in;
-        std::map<int,Conjung*> mp;
         bt.clear();
-        this->root = mp[0] = new Conjung(0, 0);
-        Str str;
-        int num;
-        while (inp >> str >> num){
-            if (str.front() != '%'){
-                int dif = std::stoi(str);
-                mp[num]->add_branch(mp[dif] = new Conjung(0, 0));
-            }else{
-                mp[num]->add_branch(bt[str[1]] = new Leaf(str[1]));
+        std::stack<Conjung*> stk({dynamic_cast<Conjung*>(root)});
+        for (char ch : in.substr(1)){
+            Node* nd;
+            if (ch == '<')
+                 nd = new Conjung(0, 0);
+            else nd = bt[ch] = new Leaf(ch);
+            while (!stk.top()->add_branch(nd)){
+                    stk.pop();
         }}
         return *this;
     }
     Str get_hash_tree() const {
-        std::map<Node*, int, Node::ptr_ads_cmp> mp;
-        std::queue<Node*> q({root});
-        stringstream out;
-        int x = 0;
-        mp[root] = x++;
-        while (!q.empty()){
-            auto nd = q.front(); q.pop();
-            auto conj = dynamic_cast<Conjung*>(nd);
-            for (auto ptr : {conj->l, conj->r}){
-                if (auto leaf = dynamic_cast<Leaf*>(ptr)){
-                    out << '%' << leaf->ch << ' ' << mp[nd] << ' ';
-                }else{
-                    out << (mp[ptr] = x++) << ' ' << mp[nd] << ' ';
-                    q.push(ptr);
-        }}}
-        return out.str();
+        Str out;
+        std::stack<Node*> stk({root});
+        while (!stk.empty()){
+            auto nd = stk.top(); stk.pop();
+            if (auto conj = dynamic_cast<Conjung*>(nd)){
+                out += '>';
+                stk.push(conj->r);
+                stk.push(conj->l);
+            }
+            if (auto leaf = dynamic_cast<Leaf*>(nd)){
+                out += leaf->ch;
+        }}
+        return out;
     }
 #endif
     friend ostream& operator << (ostream& o, const Huffman& hfm){
