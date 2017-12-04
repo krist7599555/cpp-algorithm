@@ -146,7 +146,7 @@ int main(){
     std::cout << "key \'break\' to break\n";
     while (std::cout << "huffman coding : " && std::cin >> s && s != "break"){
         Huffman hfm(s);
-        cout << hfm << endl;
+        cout << s << '\n' << hfm << endl;
         while (std::cout << "query : " && std::cin >> s && s != "break"){
             auto en = hfm.encode(s);
             cout << s << '\t' << en << endl;
