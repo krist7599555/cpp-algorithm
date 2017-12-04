@@ -33,11 +33,11 @@ public:
                 if(_l) _l->pa = this, Node::cnt += _l->cnt;
                 if(_r) _r->pa = this, Node::cnt += _r->cnt;
         }
-        void add_branch(Node* nd){
+        bool add_branch(Node* nd){
             nd->pa = this;
-                 if(!l) l = nd;
-            else if(!r) r = nd;
-            else ::exit(1);
+                 if(!l) return l = nd;
+            else if(!r) return r = nd;
+            else return false;
         }
     };
     typedef std::string Str;
@@ -93,7 +93,8 @@ public:
 #ifdef __portable__
     Huffman& build_from_hash_tree(Str in){
         bt.clear();
-        std::stack<Conjung*> stk({dynamic_cast<Conjung*>(root = new Conjung(0, 0))});
+        std::stack<Conjung*> stk;
+        stk.push(dynamic_cast<Conjung*>(root = new Conjung(0, 0)));
         for (char ch : in.substr(1)){
             Node* nd;
             if (ch == '<')
