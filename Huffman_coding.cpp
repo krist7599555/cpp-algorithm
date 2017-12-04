@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define __portable__
+//#define __portable__
 
 class Huffman {
 public:
@@ -93,15 +93,16 @@ public:
 #ifdef __portable__
     Huffman& build_from_hash_tree(Str in){
         bt.clear();
-        std::stack<Conjung*> stk;
-        stk.push(dynamic_cast<Conjung*>(root = new Conjung(0, 0)));
+        std::stack<Conjung*> stk({dynamic_cast
+            <Conjung*>(root = new Conjung(0, 0))});
         for (char ch : in.substr(1)){
             Node* nd;
-            if (ch == '<')
+            if (ch == '>')
                  nd = new Conjung(0, 0);
             else nd = bt[ch] = new Leaf(ch);
-            while (!stk.top()->add_branch(nd)){
-                    stk.pop();
+            while (!stk.top()->add_branch(nd)) stk.pop();
+            if (auto conj = dynamic_cast<Conjung*>(nd)){
+                stk.push(conj);
         }}
         return *this;
     }
