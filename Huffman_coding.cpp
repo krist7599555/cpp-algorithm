@@ -93,7 +93,7 @@ public:
 #ifdef __portable__
     Huffman& build_from_hash_tree(Str in){
         bt.clear();
-        std::stack<Conjung*> stk({dynamic_cast<Conjung*>(root)});
+        std::stack<Conjung*> stk({dynamic_cast<Conjung*>(root = new Conjung(0, 0))});
         for (char ch : in.substr(1)){
             Node* nd;
             if (ch == '<')
